@@ -1,18 +1,15 @@
 const router = require('express').Router();
+const Palindrome = require('../controller/Palindrome');
 
 router.get('/getScores', async (req, res) => {
     try {
-        return res.json([
-            {name: 'Fulando', points: 5},
-            {name: 'Fulando 2', points: 6},
-            {name: 'Fulando 3', points: 7}
-        ]);
-
+        const data = Palindrome.getScores();
+        return res.json(data);
 
         // return res.json({
         //     status: true,
         //     msg: 'Success',
-        //     data: []
+        //     data: data
         // });
     } catch (err) {
         const msg = (typeof err.message != 'undefined') ? err.message : err;
@@ -26,15 +23,11 @@ router.get('/getScores', async (req, res) => {
 
 router.post('/submitEntry', async (req, res) => {
     try {
-
-        console.log('\x1b[41m');
-        console.log(req.body);
-        console.log('\x1b[0m');
-
+        const data = Palindrome.submitEntry(req.body);
         return res.json({
             status: true,
             msg: 'Success',
-            data: []
+            data: data
         });
     } catch (err) {
         const msg = (typeof err.message != 'undefined') ? err.message : err;
