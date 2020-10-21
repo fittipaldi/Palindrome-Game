@@ -5,15 +5,32 @@ const request = supertest(urlAPI);
 
 describe('Api Test', () => {
 
-    it('Getting Points', (done) => {
-        request.get('')
+    it('Set Points', (done) => {
+        request.post('/api/submitEntry')
+            .send({
+                name: 'Tester',
+                word: 'Bob'
+            })
             .expect(200)
             .end((err, res) => {
-                console.log(res.body);
                 if (err) {
                     return done(err);
                 }
                 if (!res.body.status) {
+                    return done(err);
+                }
+                done();
+            })
+    });
+
+    it('Getting Points', (done) => {
+        request.get('/api/getScores')
+            .expect(200)
+            .end((err, res) => {
+                if (err) {
+                    return done(err);
+                }
+                if (res.body.length == 0) {
                     return done(err);
                 }
                 done();
