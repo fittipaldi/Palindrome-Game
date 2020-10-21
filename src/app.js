@@ -5,17 +5,18 @@ const path = require('path');
 
 const app = express();
 
-//Cross Domain
+// Cross Domain
 app.use(cors({
     credentials: true,
     origin: process.env.CLIENT_ORIGIN || '*'
 }));
-app.use(express.json({
-    type: 'application/json'
-}));
+// POST body json
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
+// Client public path
 app.use(express.static(path.join(__dirname, '../public')));
 
+// Root action
 app.get('/', (req, res) => {
     res.render('index.html');
 });

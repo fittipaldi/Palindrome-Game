@@ -3,7 +3,7 @@ const Score = require('../data/Score');
 const Palindrome = class PalindromeClass {
 
     getScores() {
-        return Score.getScores();
+        return Score.getScores(5, 'desc');
     }
 
     submitEntry(data) {
@@ -13,12 +13,11 @@ const Palindrome = class PalindromeClass {
         if (typeof points === 'undefined' || points < 0) {
             throw 'Invalid Palindrome';
         }
-
-        Score.setScore(name, points);
+        return Score.setScore(name, points);
     }
 
     _validatePalindrome(string) {
-        const original = string.toLocaleString().replace(/\s/g, '');
+        const original = string.toLowerCase().replace(/\s/g, '');
         const palindrome = original.split('').reverse().join('');
         if (original === palindrome) {
             return original.length;
