@@ -9,4 +9,4 @@
     Check the url http://localhost:3000. this is the Default port, but you can change in the file `.env`
 
 ### Testing 
-    `npm run test``will run the tests
+    `npm run test` to run the tests
